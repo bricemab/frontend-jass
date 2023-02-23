@@ -46,7 +46,7 @@ export default class DashboardLayout extends Vue {
   }
 
   public logout () {
-    store.dispatch('logout').then(function (data: ApplicationResponse<any>) {
+    store.dispatch('logout').then((data: ApplicationResponse<any>) => {
       this.$router.push('/login');
     });
   }

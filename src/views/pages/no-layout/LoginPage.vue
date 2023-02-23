@@ -110,7 +110,7 @@ export default class LoginPage extends Vue {
       pseudo: this.pseudo,
       email: this.email,
       password: this.password
-    }).then(function (data: ApplicationResponse<any>) {
+    }).then((data: ApplicationResponse<any>) => {
       if (data.success && data.data) {
         this.$router.push('/dashboard');
       } else {
@@ -123,7 +123,7 @@ export default class LoginPage extends Vue {
     store.dispatch('login', {
       username: this.emailOrPseudo,
       password: this.password
-    }).then(function (data: ApplicationResponse<any>) {
+    }).then((data: ApplicationResponse<any>) => {
       if (data.success) {
         this.$router.push('/dashboard');
       } else {
