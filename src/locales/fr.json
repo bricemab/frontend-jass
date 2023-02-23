@@ -1,0 +1,78 @@
+{
+  "message": "Salut",
+  "global": {
+    "system": "Système",
+    "teams": {
+      "red": "Rouge",
+      "blue": "Bleu"
+    }
+  },
+  "loginPage": {
+    "welcome": "Bienvenue !",
+    "infoDisplayName": "Ce pseudo sera visible lors de vos parties",
+    "loginInfo": "Pour accéder à la platforme de jeu, veuillez-vous connecter avec vos identifiants",
+    "createAccountInfo": "Vous voulez jouer à notre jeu ? Vous pouvez le faire en créant un compte maintenant ",
+    "createAccount": "Créer votre compte",
+    "loginButton": "Se connecter",
+    "createAccountButton": "S'inscrire",
+    "pseudo": "Pseudo",
+    "email": "Email",
+    "password": "Mot de passe",
+    "emailOrPseudo": "Email ou pseudo",
+    "errors": {
+      "emptyPseudo": "Le pseudo ne peut pas être vide",
+      "correctEmail": "Veuillez entrer une adresse email correcte",
+      "correctPassword": "Le mot de passe doit contenir au moins une lettre minuscule, majuscule et un chiffre",
+      "invalidCredentials": "Les identifiants sont invalides",
+      "emailNotUnique": "L'adresse email est déjà existante, veuillez en choisir une autre",
+      "pseudoNotUnique": "Le pseudo choisi est déjà existant, veuillez en choisir un autre"
+    }
+  },
+  "dashboard": {
+    "navbar": {
+      "home": "Acceuil",
+      "play": "Jouer",
+      "aboutUs": "A propos de nous",
+      "tournaments": "Tournois",
+      "contactUs": "Nous contacter",
+      "profile": "Profile",
+      "logOff": "Déconnexion"
+    },
+    "play": {
+      "history": "Historique",
+      "noGamePlayed": "Aucune partie jouée",
+      "playNow": "Jouer maintenant",
+      "searchGame": "Recherche de partie en cours"
+    }
+  },
+  "games": {
+    "cards": {
+      "of": "de",
+      "ace": "Ace",
+      "king": "Roi",
+      "queen": "Reine",
+      "jack": "Valet",
+      "ten": "Dix",
+      "nine": "Neuf",
+      "eight": "huit",
+      "seven": "Sept",
+      "six": "Six",
+      "spades": "Pique",
+      "clubs": "Trèfle",
+      "hearts": "Coeur",
+      "diamonds": "Carreau"
+    },
+    "loadingMessage": {
+      "lookingForGame": "Recherche d'une partie en cours",
+      "connexionInProgress": "Connexion au serveur en cours",
+      "errorJoin": "Une erreur est survenue lors de la recherche d'une partie",
+      "waitingSelectionTeamOtherPlayers": "En attente du choix d'une équipe des autres joueurs",
+      "loadingDeck": "Chargement de votre jeu de cartes"
+    },
+    "errorMessages": {
+      "commandMsgNotFound": "Commande inexistante"
+    },
+    "availablePosition": "Equipe $team$",
+    "addMessageInput": "Entrez votre message"
+  }
+}

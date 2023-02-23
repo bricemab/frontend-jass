@@ -1,0 +1,16 @@
+{
+  "message": "Salut",
+  "global": {
+
+  },
+  "loginPage": {
+    "welcomeBack": "Bienvenue!",
+    "loginInfo": "Pour accéder à la platforme de jeu, veuillez-vous connecter avec vos identifiants",
+    "createAccount": "Créer votre compte",
+    "loginButton": "Se connecter",
+    "createAccountButton": "S'inscrire",
+    "pseudo": "Pseudo",
+    "email": "Email",
+    "password": "Mot de passe"
+  }
+}

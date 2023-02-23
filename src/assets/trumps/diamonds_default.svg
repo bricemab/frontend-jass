@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="svg2" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" inkscape:version="0.48.0 r9654" sodipodi:docname="ace_of_diamonds.svg" inkscape:export-filename="/home/byron/art/cards/final/PNGs/ace_of_diamonds.png" inkscape:export-xdpi="215.44792" inkscape:export-ydpi="215.44792" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="777.5 403.5 706.2 926.9" enable-background="new 777.5 403.5 706.2 926.9" xml:space="preserve">
+<filter  height="1.3248404" width="1.2786888" color-interpolation-filters="sRGB" y="-0.16242018" id="filter3834-6-0" x="-0.13934441" inkscape:collect="always">
+	<feGaussianBlur  stdDeviation="9.5105772" id="feGaussianBlur3836-6-6" inkscape:collect="always"></feGaussianBlur>
+</filter>
+<g id="g3011" transform="matrix(0.17001436,0,0,0.17001436,19.517107,29.794341)">
+	<g id="layer1-2" transform="matrix(35.005102,0,0,35.005102,369.18369,512.27289)">
+		
+			<radialGradient id="dl_1_" cx="-50.3786" cy="255.1575" r="8" gradientTransform="matrix(-294.8422 1.4484 -2.3877 -486.0511 -14068.3584 124187.1406)" gradientUnits="userSpaceOnUse">
+			<stop  offset="0" style="stop-color:#DF0000"/>
+			<stop  offset="1" style="stop-color:#DF0000;stop-opacity:0.6412"/>
+		</radialGradient>
+		<path id="dl" sodipodi:nodetypes="ccccccccc" inkscape:connector-curvature="0" fill="#AF0404"  d="M199.9,91.2
+			c-15.6-21.5-23.7-43-23.7-43s-8.2,21.5-23.7,43c-16.3,20.8-35.6,34.9-35.6,34.9s19.3,14.1,35.6,34.9c15.6,21.5,23.7,43,23.7,43
+			s8.2-21.5,23.7-43c16.3-20.8,35.6-34.9,35.6-34.9S216.2,111.9,199.9,91.2z"/>
+	</g>
+	<g id="path3762-6" sodipodi:nodetypes="cscsc" inkscape:connector-curvature="0" filter="url(#filter3834-6-0)">
+		
+			<radialGradient id="SVGID_1_" cx="-65811.0703" cy="-224130.8438" r="81.9028" gradientTransform="matrix(-0.3267 0.2778 -0.1595 -0.1997 -51280.1211 -22164.918)" gradientUnits="userSpaceOnUse">
+			<stop  offset="0" style="stop-color:#FFFFFF;stop-opacity:0.4351"/>
+			<stop  offset="1" style="stop-color:#000000;stop-opacity:0"/>
+		</radialGradient>
+		<path fill="#AF0404" d="M6320.3,3049.8c0,0,260.3,1054.6-24.5,1422.5c-320.4,413.8-1500.4,374.5-1500.4,374.5
+			s732-404.9,998.3-722.4C6047.4,3821.9,6320.3,3049.8,6320.3,3049.8z"/>
+	</g>
+</g>
+</svg>
