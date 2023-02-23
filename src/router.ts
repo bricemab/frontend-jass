@@ -85,7 +85,7 @@ const router = createRouter({
   linkActiveClass: 'active-link'
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(function (to, from, next) {
   const {
     isAllowed,
     redirectionRoute

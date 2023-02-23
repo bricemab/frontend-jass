@@ -684,8 +684,8 @@ export default class Utils {
   }
 
   static async createTimeOut (ms: number) {
-    return new Promise(resolve => {
-      setTimeout(() => {
+    return new Promise(function (resolve) {
+      setTimeout(function () {
         resolve(true);
       }, ms);
     });

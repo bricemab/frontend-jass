@@ -64,10 +64,10 @@ const store = createStore({
   },
   actions: {
     login ({ commit }, user) {
-      return new Promise((resolve, reject) => {
+      return new Promise(function (resolve, reject) {
         commit('auth_request');
         Utils.postEncodedToBackend('/users/authentication', user)
-          .then((response) => {
+          .then(function (response) {
             if (!response.success) {
               resolve(response);
             }
@@ -100,7 +100,7 @@ const store = createStore({
               resolve(response);
             }
           })
-          .catch((e) => {
+          .catch(function (e) {
             commit('auth_error');
             sessionStorage.removeItem('token');
             reject(e);
@@ -108,10 +108,10 @@ const store = createStore({
       });
     },
     register ({ commit }, user) {
-      return new Promise((resolve, reject) => {
+      return new Promise(function (resolve, reject) {
         commit('auth_request');
         Utils.postEncodedToBackend('/users/register', user)
-          .then((response) => {
+          .then(function (response) {
             if (!response.success) {
               resolve(response);
             }
@@ -144,7 +144,7 @@ const store = createStore({
               resolve(response);
             }
           })
-          .catch((e) => {
+          .catch(function (e) {
             commit('auth_error');
             sessionStorage.removeItem('token');
             reject(e);
@@ -152,7 +152,7 @@ const store = createStore({
       });
     },
     logout ({ commit }) {
-      return new Promise((resolve) => {
+      return new Promise(function (resolve) {
         commit('logout');
         sessionStorage.clear();
         delete axios.defaults.headers.common['x-user-token'];
@@ -169,7 +169,7 @@ const persistedState = createPersistedState({
   key: 'vuex-persisted-state'
 });
 
-store.subscribe((mutation, state) => {
+store.subscribe(function (mutation, state) {
   localStorage.setItem('vuex-persisted-state', JSON.stringify(state));
 });
 

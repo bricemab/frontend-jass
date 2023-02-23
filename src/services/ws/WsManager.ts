@@ -181,7 +181,7 @@ export default class WsManager {
     clearTimeout(manager.timeOut);
     console.log('Connexion has been closed');
     console.log('We will try to reconnect you in 5 seconds');
-    setTimeout(() => {
+    setTimeout(function () {
       manager.connectWs(manager.ws.user!, manager.ws.userRole!, manager.onMessage);
     }, 5000);
   }
@@ -199,7 +199,7 @@ export default class WsManager {
     const wsKey = clientWs.wsKey ? clientWs.wsKey : clientWs.token;
     console.log('receive pinf from WS');
     clearTimeout(manager.timeOut);
-    manager.timeOut = setTimeout(() => {
+    manager.timeOut = setTimeout(function () {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       clientWs.terminate();

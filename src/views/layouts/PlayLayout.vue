@@ -244,10 +244,10 @@ export default class PlayLayout extends Vue {
   }
 
   public async joinNewGame () {
-    return new Promise((resolve) => {
+    return new Promise(function (resolve) {
       this.showLoader('games.loadingMessage.lookingForGame');
 
-      const wsCallbackFunction = async (packet: any) => {
+      const wsCallbackFunction = async function (packet: any) {
         if (packet.success && packet.data) {
           resolve({
             success: true,
@@ -272,10 +272,10 @@ export default class PlayLayout extends Vue {
   }
 
   public async startGame () {
-    return new Promise((resolve) => {
+    return new Promise(function (resolve) {
       // this.showLoader('games.loadingMessage.lookingForGame');
 
-      const wsCallbackFunction = async (packet: any) => {
+      const wsCallbackFunction = async function (packet: any) {
         console.log(packet);
         if (packet.success && packet.data) {
           resolve({
@@ -330,7 +330,7 @@ export default class PlayLayout extends Vue {
   }
 
   public async joinTeam (pos: PositionGame) {
-    return new Promise((resolve) => {
+    return new Promise(function (resolve) {
       if (!pos.selectable) {
         return resolve({
           success: true,
@@ -341,7 +341,7 @@ export default class PlayLayout extends Vue {
       pos.selectable = false;
       pos.pseudo = store.getters.user.pseudo;
 
-      const wsCallbackFunction = async (packet: any) => {
+      const wsCallbackFunction = async function (packet: any) {
         if (packet.success && packet.data) {
           const {
             availableTeamPlaces,
@@ -597,10 +597,10 @@ export default class PlayLayout extends Vue {
   }
 
   public async getCurrentDeck () {
-    return new Promise((resolve) => {
+    return new Promise(function (resolve) {
       this.showLoader('games.loadingMessage.loadingDeck');
 
-      const wsCallbackFunction = async (packet: any) => {
+      const wsCallbackFunction = async function (packet: any) {
         if (packet.success && packet.data) {
           const packetData = packet as WebsocketPacket<WsPacketDeckCardsResponse>;
           this.deck = packetData.data.deckCards;

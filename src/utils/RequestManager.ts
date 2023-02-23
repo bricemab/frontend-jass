@@ -17,8 +17,8 @@ export default class RequestManager {
   }
 
   static asyncResolver (fn: any) {
-    return (request: any, response: any, next: any) => {
-      Promise.resolve(fn(request, response, next)).catch((error: any) => {
+    return function (request: any, response: any, next: any) {
+      Promise.resolve(fn(request, response, next)).catch(function (error: any) {
         RequestManager.sendResponse(response, {
           success: false,
           error
@@ -47,14 +47,14 @@ export default class RequestManager {
     params: any,
     specialConfig?: AxiosRequestConfig
   ) {
-    return new Promise<DataType>((resolve, reject: ApplicationReject) => {
+    return new Promise<DataType>(function (resolve, reject: ApplicationReject) {
       Global.instanceAxios
         .post(url, params, specialConfig)
-        .then((response) => {
+        .then(function (response) {
           const { status, data } = response;
           resolve(data);
         })
-        .catch((error) => {
+        .catch(function (error) {
           resolve(error.response.data);
         });
     });

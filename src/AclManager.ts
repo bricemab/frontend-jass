@@ -63,7 +63,7 @@ export default class AclManager {
           // @ts-ignore
           RolesAllowedPermissions[userRole];
 
-        userPermissions.forEach((userPermission) => {
+        userPermissions.forEach(function (userPermission) {
           if (typeof userPermission === 'object') {
             if (
               Object.values(userPermission).includes(routeRequiredPermission)
