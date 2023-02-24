@@ -82,6 +82,70 @@ export default class LoginPage extends Vue {
   pseudo = ''
   email = ''
   password = ''
+
+  mounted () {
+    if (!config.isProduction) {
+      this.emailOrPseudo = 'brice';
+      this.password = 'Ipad2002';
+    }
+  }
+
+  async register () {
+    let isValid = true;
+    if (this.pseudo === '') {
+      isValid = false;
+      Utils.toastError('', this.$t('loginPage.errors.emptyPseudo') as string);
+    }
+    // if (this.email === '' || !Utils.isEmailValid(this.email)) {
+    //   isValid = false;
+    //   Utils.toastError('', this.$t('loginPage.errors.correctEmail'));
+    // }
+    // if (!Utils.isPasswordValid(this.password)) {
+    //   isValid = false;
+    //   Utils.toastError('', this.$t('loginPage.errors.correctPassword'));
+    // }
+    if (!isValid) return;
+
+    store.dispatch('register', {
+      pseudo: this.pseudo,
+      email: this.email,
+      password: this.password
+    }).then((data: ApplicationResponse<any>) => {
+      if (data.success && data.data) {
+        this.$router.push('/dashboard');
+      } else {
+        Utils.manageError(data.error!);
+      }
+    });
+  }
+
+  login () {
+    store.dispatch('login', {
+      username: this.emailOrPseudo,
+      password: this.password
+    }).then((data: ApplicationResponse<any>) => {
+      if (data.success) {
+        this.$router.push('/dashboard');
+      } else {
+        Utils.manageError(data.error!);
+      }
+    });
+  }
+
+  get passwordRevele () {
+    return this.isPasswordRevele ? 'text' : 'password';
+  }
+
+  onPasswordRevele () {
+    this.isPasswordRevele = !this.isPasswordRevele;
+    return this.isPasswordRevele;
+  }
+
+  switchMode () {
+    this.isPasswordRevele = false;
+    this.password = '';
+    this.isLoginMode = !this.isLoginMode;
+  }
 }
 </script>
 <style scoped lang="scss">
