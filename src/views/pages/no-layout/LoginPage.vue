@@ -85,8 +85,8 @@ export default class LoginPage extends Vue {
 
   mounted () {
     if (!config.isProduction) {
-      this.emailOrPseudo = 'brice';
-      this.password = 'Ipad2002';
+      this.emailOrPseudo = '';
+      this.password = '';
     }
   }
 
@@ -100,10 +100,10 @@ export default class LoginPage extends Vue {
     //   isValid = false;
     //   Utils.toastError('', this.$t('loginPage.errors.correctEmail'));
     // }
-    // if (!Utils.isPasswordValid(this.password)) {
-    //   isValid = false;
-    //   Utils.toastError('', this.$t('loginPage.errors.correctPassword'));
-    // }
+    if (!Utils.isPasswordValid(this.password)) {
+      isValid = false;
+      Utils.toastError('', this.$t('loginPage.errors.correctPassword'));
+    }
     if (!isValid) return;
 
     store.dispatch('register', {
