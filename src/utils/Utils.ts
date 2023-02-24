@@ -657,15 +657,6 @@ export default class Utils {
       .trim();
   }
 
-  static ucWords (string: string) {
-    if (!string) {
-      return '';
-    }
-    return string
-      .toLowerCase()
-      .replace(/(?<= )[^\s]|^./g, (a) => a.toUpperCase());
-  }
-
   static isPasswordValid (password: string) {
     // mot de passe complexe ==> (?=.*?[!@#/\\\-_+$&*~])
     // eslint-disable-next-line prefer-regex-literals
