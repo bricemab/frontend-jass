@@ -96,10 +96,10 @@ export default class LoginPage extends Vue {
       isValid = false;
       Utils.toastError('', this.$t('loginPage.errors.emptyPseudo') as string);
     }
-    // if (this.email === '' || !Utils.isEmailValid(this.email)) {
-    //   isValid = false;
-    //   Utils.toastError('', this.$t('loginPage.errors.correctEmail'));
-    // }
+    if (this.email === '' || !Utils.isEmailValid(this.email)) {
+      isValid = false;
+      Utils.toastError('', this.$t('loginPage.errors.correctEmail'));
+    }
     if (!Utils.isPasswordValid(this.password)) {
       isValid = false;
       Utils.toastError('', this.$t('loginPage.errors.correctPassword'));
