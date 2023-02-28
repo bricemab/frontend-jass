@@ -534,6 +534,7 @@ button:hover {
       }
       &.selectable {
         cursor: pointer;
+        z-index: 99;
       }
       &:nth-child(even) {
         background-color: $blueTeam;

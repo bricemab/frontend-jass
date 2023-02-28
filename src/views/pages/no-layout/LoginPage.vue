@@ -85,8 +85,8 @@ export default class LoginPage extends Vue {
 
   mounted () {
     if (!config.isProduction) {
-      this.emailOrPseudo = '';
-      this.password = '';
+      this.emailOrPseudo = 'brice';
+      this.password = 'Ipad2002';
     }
   }
 

@@ -2,12 +2,12 @@ const { defineConfig } = require('@vue/cli-service');
 module.exports = defineConfig({
   transpileDependencies: true,
 
-  devServer: {
-    allowedHosts: 'all',
-    client: {
-      webSocketURL: 'ws://localhost:3000'
-    }
-  },
+  // devServer: {
+  //   allowedHosts: 'all',
+  //   client: {
+  //     webSocketURL: 'ws://localhost:3000'
+  //   }
+  // },
   pluginOptions: {
     i18n: {
       locale: 'en',

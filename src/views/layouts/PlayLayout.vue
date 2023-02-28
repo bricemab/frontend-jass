@@ -140,7 +140,7 @@ export default class PlayLayout extends Vue {
       this.distributeCardsCounter++;
     }
     await Utils.createTimeOut(500);
-    // await this.reveleCards();
+    await this.reveleCards();
   }
 
   public positions = [{
@@ -337,7 +337,7 @@ export default class PlayLayout extends Vue {
           data: {}
         });
       }
-      this.addSystemMessage('games.loadingMessage.waitingSelectionTeamOtherPlayers');
+      // this.addSystemMessage('games.loadingMessage.waitingSelectionTeamOtherPlayers');
       pos.selectable = false;
       pos.pseudo = store.getters.user.pseudo;
 
@@ -512,6 +512,12 @@ export default class PlayLayout extends Vue {
         }
         break;
       case WebSocketOpCodeClient.WSS_TO_ANY__GAME_START__REQUEST:
+        messageTyped = message as WebSocketServerSecuredMessage<any>;
+        this.chooseTeams = true;
+        this.fillPositionsAlreadyTaken();
+        await this.getCurrentDeck() as WebsocketPacket<WsPacketDeckCardsResponse>;
+        await Utils.createTimeOut(2000);
+        this.hideLoader();
         await this.startGame();
         break;
       case WebSocketOpCodeClient.WSS_TO_ANY__PING__REQUEST:
@@ -520,20 +526,15 @@ export default class PlayLayout extends Vue {
         WsManager.sendMessageToServer(manager.ws, Utils.uniqueId(24), WebSocketOpCodeServer.WSS_FROM_ANY__PONG__REQUEST, {}, true);
         break;
       case WebSocketOpCodeClient.WSS_TO_ANY__DISTRIBUTE_DECK__RESPONSE:
-        callback = GlobalStore.getItem(message.requestId);
-        if (
-          callback &&
-          typeof callback === 'function'
-        ) {
-          await callback(message.packet);
-          GlobalStore.removeItem(message.requestId);
-        } else {
-          if (!callback) {
-            console.log(
-              `The WS request with ${message.opCode} could not be processed correctly, any callback with the id ${message.requestId} was found`
-            );
-          }
-        }
+        messageTyped = message as WebSocketServerSecuredMessage<WsPacketDeckCardsResponse>;
+        this.chooseTeams = true;
+        this.fillPositionsAlreadyTaken();
+        await Utils.createTimeOut(2000);
+        this.deck = messageTyped.packet.data.deckCards;
+        this.trumpPosition = messageTyped.packet.data.trumpPosition;
+        this.currentPositionDistribute = messageTyped.packet.data.trumpPosition;
+        this.hideLoader();
+        await this.distributeCardsDynamicly();
         break;
       case WebSocketOpCodeClient.WSS_TO_ANY__INVALID_QUERY__RESPONSE:
       case WebSocketOpCodeClient.WSS_TO_ANY__INVALID_OP_CODE__RESPONSE:
@@ -604,6 +605,8 @@ export default class PlayLayout extends Vue {
         if (packet.success && packet.data) {
           const packetData = packet as WebsocketPacket<WsPacketDeckCardsResponse>;
           this.deck = packetData.data.deckCards;
+          this.trumpPosition = packetData.data.trumpPosition;
+          this.currentPositionDistribute = packetData.data.trumpPosition;
           resolve({
             success: true,
             data: packet.data
