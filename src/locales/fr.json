@@ -29,9 +29,31 @@
     }
   },
   "dashboard": {
+    "welcome": "Bienvenue sur e-jass",
+    "ideas": {
+      "firstLogin": "N'hésitez pas à aller faire un tour dans la page \"Vos idéees\" pour de me laisser vos idées afin d'améliorer la plateforme",
+      "ideas": "Vos idées",
+      "ideasInfo": "Actuellement, la plateforme e-jass est encore en cours de development. Elle aura pour but de pouvoir jouer au fameux jeu de carte qu'est le Jass. Vous avez la possibilité de participer au bon développement de cette plateforme en envoyant toutes sortes d'idées qui pourraient améliorer le contenu de e-jass.",
+      "form": {
+        "object": "Objet",
+        "content": "Contenu",
+        "file": "Attacher un fichier",
+        "feedback": "Recevoir un feedback de votre idée par mail",
+        "send": "Envoyer"
+      },
+      "errors": {
+        "objectEmpty": "L'objet ne peut pas être vide",
+        "contentEmpty": "Le contenu du message ne peut pas être vide"
+      }
+    },
+    "disabledModules": {
+      "tournaments": "Il semblerait que le mode Tournois ne soit pas encore disponible. Revenez plus tard pour y accéder.",
+      "games": "Il semblerait que le mode Jouer ne soit pas encore disponible. Revenez plus tard pour y accéder."
+    },
     "navbar": {
       "home": "Acceuil",
       "play": "Jouer",
+      "ideas": "Vos idées",
       "aboutUs": "A propos de nous",
       "tournaments": "Tournois",
       "contactUs": "Nous contacter",

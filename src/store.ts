@@ -47,7 +47,7 @@ const store = createStore({
       state.status = 'success';
       state.token = data.token;
       state.user = data.user;
-      state.userRole = data.userRole || 'USER_LOGGED';
+      state.userRole = data.role || 'USER_LOGGED';
     },
     auth_error (state) {
       state.status = 'error';
@@ -83,6 +83,7 @@ const store = createStore({
                 axios.defaults.headers.common['x-user-token'] = token;
                 axios.defaults.headers.get['x-user-token'] = token;
                 sessionStorage.setItem('token', token);
+                sessionStorage.setItem('first-login', 'true');
                 commit('auth_success', {
                   token,
                   user: tokenDecoded.currentUser,
@@ -127,6 +128,7 @@ const store = createStore({
                 axios.defaults.headers.common['x-user-token'] = token;
                 axios.defaults.headers.get['x-user-token'] = token;
                 sessionStorage.setItem('token', token);
+                sessionStorage.setItem('first-login', 'true');
                 commit('auth_success', {
                   token,
                   user: tokenDecoded.currentUser,

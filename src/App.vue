@@ -22,6 +22,7 @@ html, body {
   height: 100%;
   width: 100%;
   position: relative;
+  background-color: $primaryBg;
 }
 #app {
   //font-family: Avenir, Helvetica, Arial, sans-serif;

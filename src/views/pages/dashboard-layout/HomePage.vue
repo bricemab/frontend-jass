@@ -1,7 +1,7 @@
 <template>
   <div class="play-wrapper">
     <img src="@/assets/play-now.jpg" alt="play now"/>
-    <button class="primary is-small" @click="redirectUrl('/game')">{{ $t('dashboard.play.playNow') }}</button>
+    <button class="primary is-small" @click="redirectUrl('/game')" v-on:click="gameDisabled">{{ $t('dashboard.play.playNow') }}</button>
   </div>
   <div class="statistics">
     <div class="title">{{ $t('dashboard.play.history') }}</div>
@@ -94,12 +94,30 @@
 
 <script lang="ts">
 import { Vue } from 'vue-class-component';
+import config from '@/config/config';
+import Utils from '@/utils/Utils';
 
 export default class HomePage extends Vue {
-  public noGame = false;
+  public noGame = true;
+  public games = [];
+
+  mounted () {
+    if (sessionStorage.getItem('first-login')) {
+      Utils.toastInfo(Utils.translate('dashboard.welcome'), Utils.translate('dashboard.ideas.firstLogin'), 99999999, 'top-center');
+      sessionStorage.removeItem('first-login');
+    }
+  }
 
   redirectUrl (route: string) {
-    this.$router.push('/game');
+    if (config.settings.isPlayNowEnabled) {
+      this.$router.push('/game');
+    }
+  }
+
+  public gameDisabled () {
+    if (!config.settings.isPlayNowEnabled) {
+      Utils.toastInfo('', Utils.translate('dashboard.disabledModules.games'));
+    }
   }
 
   getCountryPath (code: string) {

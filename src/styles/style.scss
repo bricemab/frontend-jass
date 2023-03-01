@@ -52,7 +52,7 @@ button:hover {
 }
 
 .footer {
-  position: absolute;
+  position: fixed;
   bottom: 12px;
   font-size: 13px;
   width: 100%;
@@ -64,6 +64,18 @@ button:hover {
   width: 300px;
   display: flex;
   align-items: center;
+  &.max-width, &.max-width {
+    width: 100%;
+  }
+  &.is-label {
+    label {
+      font-weight: bold;
+      width: 100%;
+      margin: 10px 0;
+    }
+    flex-direction: column;
+    margin: 0;
+  }
 
   span.icon:not(.tooltip-info) {
     position: absolute;
@@ -110,15 +122,24 @@ button:hover {
     top: -8px;
   }
 
-  input.input {
-    width: calc(100% - 50px);;
+  textarea.input {
+    height: 200px;
+  }
+
+  input.is-light, textarea.is-light {
+    background-color: $secondBg !important;
+    padding: 10px !important;
+    width: calc(100% - 20px);
+  }
+  input.input, textarea.input {
+    resize:vertical;
+    width: calc(100% - 50px);
     color: $primaryText;
     padding: 10px 10px 10px 40px;
     border-radius: 10px;
     font-size: 18px;
     background-color: $primaryBg;
     border: none;
-
     &:focus {
       outline: none;
     }
@@ -128,7 +149,7 @@ button:hover {
     }
   }
   @if("span.icon has class is-password-revele") {
-    input.input {
+    input.input, textarea.input {
       padding: 10px 40px 10px 40px
     }
 
@@ -248,21 +269,22 @@ button:hover {
       align-items: center;
       color: $primaryText;
       display: flex;
-      background:
-        linear-gradient( 90deg, $primaryText  50%, #fff 0),
-        linear-gradient(-90deg, $primaryText  50%, #fff 0),
-        linear-gradient( 90deg, #0000 50%, $primaryText 0),
-        linear-gradient(-90deg, #0000 50%, $primaryText 0);
-      background-repeat: no-repeat;
-      background-size: 200% 50%;
-      background-position: top left, bottom right;
-      -webkit-background-clip: text, text, padding-box, padding-box;
-      transition: 0.4s;
+      //background:
+      //  linear-gradient( 90deg, $primaryText  50%, #fff 0),
+      //  linear-gradient(-90deg, $primaryText  50%, #fff 0),
+      //  linear-gradient( 90deg, #0000 50%, $primaryText 0),
+      //  linear-gradient(-90deg, #0000 50%, $primaryText 0);
+      //background-repeat: no-repeat;
+      //background-size: 200% 50%;
+      //background-position: top left, bottom right;
+      //-webkit-background-clip: text, text, padding-box, padding-box;
+      transition: 0.5s;
 
       &:not(.router-link-exact-active):hover {
         //background-color: $grey;
         color: $red;
         font-weight: bold;
+        background-color: $white;
         background-position: top right, bottom left;
       }
       &.router-link-exact-active {
@@ -271,6 +293,70 @@ button:hover {
         color: $red;
       }
     }
+  }
+}
+.is-on-line {
+  display: flex;
+}
+.is-checkbox {
+  .label-input {
+    width: max-content !important;
+    padding-right: 20px;
+  }
+  display: flex;
+  flex-direction: row !important;
+  justify-content: flex-start;
+  align-items: center !important;;
+  .switch {
+    margin: 0 !important;
+    position: relative;
+    display: inline-block;
+    width: 45px !important;
+    height: 24px;
+  }
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $secondBg;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  input:checked + .slider {
+    background-color: $redSecond;
+  }
+  input:focus + .slider {
+    box-shadow: 0 0 1px $redSecond;
+  }
+  input:checked + .slider:before {
+    -webkit-transform: translateX(22px);
+    -ms-transform: translateX(22px);
+    transform: translateX(22px);
+  }
+  .slider.round {
+    border-radius: 34px;
+  }
+  .slider.round:before {
+    border-radius: 50%;
   }
 }
 
@@ -286,6 +372,18 @@ button:hover {
   border-radius: 10px;
 }
 .dashboard-wrapper {
+  .ideas {
+    padding: 0 20px;
+    max-width: 700px;
+    & > h1 {
+      margin-bottom: 10px;
+    }
+    .info {
+      font-style: italic;
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+  }
   .black-opacity {
     position: absolute;
     top: 260px;
@@ -301,7 +399,9 @@ button:hover {
   display: flex;
   gap: 50px;
   justify-content: center;
-  align-items: center;
+  &:has(.play-wrapper) {
+    align-items: center;
+  }
 
   .statistics {
     height: calc(70% - 40px);
@@ -405,7 +505,7 @@ button:hover {
   &.open {
     left: 0;
   }
-  input {
+  input, textarea {
     position: absolute;
     bottom: 10px;
     left: 10px;
@@ -643,7 +743,7 @@ button:hover {
   }
   .input-field {
     width: 90%;
-    input.input {
+    input.input, textarea.input {
       font-size: 14px;
       padding: 5px 40px 5px 40px;
     }
@@ -673,7 +773,7 @@ button:hover {
       display: block;
       height: 200px;
       a {
-        height: calc(100% / 6)
+        height: calc(100% / $nbrMenu)
       }
     }
     .close-open-menu{
@@ -742,7 +842,7 @@ button:hover {
   }
   .input-field {
     width: 260px;
-    input.input {
+    input.input, textarea.input {
       font-size: 14px;
     }
   }
@@ -768,7 +868,7 @@ button:hover {
       display: block;
       height: 200px;
       a {
-        height: calc(100% / 6)
+        height: calc(100% / $nbrMenu)
       }
     }
     .close-open-menu{
@@ -834,7 +934,7 @@ button:hover {
   }
   .input-field {
     width: 260px;
-    input.input {
+    input.input, textarea.input {
       font-size: 14px;
     }
   }
@@ -890,7 +990,7 @@ button:hover {
   }
   .input-field {
     width: 260px;
-    input.input {
+    input.input, textarea.input {
       font-size: 14px;
     }
   }
@@ -933,7 +1033,7 @@ button:hover {
   }
   .input-field {
     width: 260px;
-    input.input {
+    input.input, textarea.input {
       font-size: 14px;
     }
   }

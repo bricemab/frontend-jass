@@ -14,6 +14,8 @@ import i18n from '@/locales/i18n';
 import { CardObjectType, CARDS, DeckCard } from '@/Types/CardsType';
 import WebSocketOpCodeClient from '@/services/ws/WebSocketOpCodeClient';
 import WebSocketOpCodeServer from '@/services/ws/WebSocketOpCodeServer';
+import { Position } from 'mosha-vue-toastify/dist/types';
+import Global from '@/utils/Global';
 
 /**
  * Classe Utils contient :
@@ -432,14 +434,15 @@ export default class Utils {
   ): Promise<ApplicationResponse<any>> {
     const token = Utils.buildHmacSha256Signature(params);
     if (isUploadFile) {
-      return RequestManager.executePost(
-        url,
-        {
-          token,
-          params
-        },
-        config
-      );
+      return Global.instanceAxios.post(url, params, config);
+      // return RequestManager.executePost(
+      //   url,
+      //   {
+      //     token,
+      //     data: params
+      //   },
+      //   config
+      // );
     } else {
       const data = {
         data: params,
@@ -469,6 +472,22 @@ export default class Utils {
       transition: 'slide',
       showIcon: true,
       toastBackgroundColor: '#AF0404',
+      hideProgressBar: true,
+      timeout: time
+    });
+  }
+
+  static toastInfo (title: string, description: string, time?: number, position?: Position) {
+    createToast({
+      title: title,
+      description: description
+    },
+    {
+      position: position ?? 'bottom-center',
+      type: 'info',
+      transition: 'slide',
+      showIcon: true,
+      // toastBackgroundColor: '#AF0404',
       hideProgressBar: true,
       timeout: time
     });

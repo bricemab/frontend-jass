@@ -6,7 +6,8 @@
     </router-link>
     <div :class="menuClass">
       <router-link @click="closeMenu" to="/dashboard">{{ $t('dashboard.navbar.play') }}</router-link>
-      <router-link @click="closeMenu" to="/dashboard/tournaments">{{ $t('dashboard.navbar.tournaments') }}</router-link>
+      <router-link @click="closeMenu" to="/dashboard/ideas">{{ $t('dashboard.navbar.ideas') }}</router-link>
+      <router-link @click="closeMenu" v-on:click="tournamentDisabled" to="/dashboard/tournaments">{{ $t('dashboard.navbar.tournaments') }}</router-link>
       <router-link @click="closeMenu" to="/dashboard/about-us">{{ $t('dashboard.navbar.aboutUs') }}</router-link>
       <router-link @click="closeMenu" to="/about">{{ $t('dashboard.navbar.contactUs') }}</router-link>
       <router-link @click="closeMenu" to="/profile">{{ $t('dashboard.navbar.profile') }}</router-link>
@@ -33,6 +34,7 @@ import store from '@/store';
 import { ApplicationResponse } from '@/Types/GlobalType';
 import Utils from '@/utils/Utils';
 import moment from 'moment';
+import config from '@/config/config';
 
 export default class DashboardLayout extends Vue {
   public isMenuOpen = false
@@ -49,6 +51,12 @@ export default class DashboardLayout extends Vue {
     store.dispatch('logout').then((data: ApplicationResponse<any>) => {
       this.$router.push('/login');
     });
+  }
+
+  public tournamentDisabled () {
+    if (!config.settings.isTournamentsEnabled) {
+      Utils.toastInfo('', Utils.translate('dashboard.disabledModules.tournaments'));
+    }
   }
 
   get dashboardClass () {
