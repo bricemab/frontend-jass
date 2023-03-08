@@ -2,7 +2,7 @@ import WebSocketOpCodeClient from './WebSocketOpCodeClient';
 import WebSocketOpCodeServer from './WebSocketOpCodeServer';
 import { Game, GameUser, Teams, TeamType, UserRoles, UserType } from '@/Types/GlobalType';
 import { Moment } from 'moment';
-import { DeckCard } from '@/Types/CardsType'
+import { DeckCard } from '@/Types/CardsType';
 
 export enum WebSocketState {
   DISCONNECTED = 'DISCONNECTED',
