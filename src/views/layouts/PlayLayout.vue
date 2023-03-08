@@ -47,7 +47,7 @@
     </div>
   </div>
   <div class="footer">
-    © Copyright {{ date }} Brice Mabillard.
+    © Copyright {{ date }} e-jass.
   </div>
 </template>
 

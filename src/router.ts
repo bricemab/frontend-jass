@@ -3,8 +3,10 @@ import HomePage from '@/views/pages/dashboard-layout/HomePage.vue';
 import AdminIdeasPage from '@/views/pages/dashboard-layout/AdminIdeasPage.vue';
 import IdeasPage from '@/views/pages/dashboard-layout/IdeasPage.vue';
 import AboutUsPage from '@/views/pages/dashboard-layout/AboutUsPage.vue';
+import ContactUsPage from '@/views/pages/dashboard-layout/ContactUsPage.vue';
 import NoLayout from '@/views/layouts/NoLayout.vue';
 import LoginPage from '@/views/pages/no-layout/LoginPage.vue';
+import ResetPasswordPage from '@/views/pages/no-layout/ResetPasswordPage.vue';
 import { Permission } from '@/permissions';
 import NotFoundPage from '@/views/pages/no-layout/NotFoundPage.vue';
 import DashboardLayout from '@/views/layouts/DashboardLayout.vue';
@@ -34,6 +36,14 @@ const routes: Array<RouteRecordRaw> = [
         path: 'about-us',
         name: 'about-us',
         component: AboutUsPage,
+        meta: {
+          permission: Permission.specialState.userLoggedIn
+        }
+      },
+      {
+        path: 'contact-us',
+        name: 'contact-us',
+        component: ContactUsPage,
         meta: {
           permission: Permission.specialState.userLoggedIn
         }
@@ -81,6 +91,14 @@ const routes: Array<RouteRecordRaw> = [
         }
       },
       {
+        path: '/reset-password/:token?',
+        name: 'reset-password',
+        component: ResetPasswordPage,
+        meta: {
+          permission: Permission.specialState.userLoggedOff
+        }
+      },
+      {
         path: '/*',
         name: 'not-found',
         component: NotFoundPage,
@@ -105,6 +123,8 @@ router.beforeEach(function (to, from, next) {
   } = AclManager.hasUserAccessToPermission(
     to.meta.permission as string
   );
+
+  document.title = 'E-Jass';
 
   // next();
   if (isAllowed) {

@@ -2,7 +2,7 @@ import * as CryptoJS from 'crypto-js';
 import config from '@/config/config';
 import qs from 'qs';
 import {
-  ApplicationError,
+  ApplicationError, ApplicationReject,
   ApplicationResponse,
   AuthenticationErrors,
   MessageErrorType,
@@ -409,7 +409,7 @@ export default class Utils {
     }
   }
 
-  static translate (txt: string, params?: object) {
+  static translate (txt: string, params?: object): string {
     const { t } = i18n.global;
     txt = t(txt);
     if (params) {
@@ -434,7 +434,17 @@ export default class Utils {
   ): Promise<ApplicationResponse<any>> {
     const token = Utils.buildHmacSha256Signature(params);
     if (isUploadFile) {
-      return Global.instanceAxios.post(url, params, config);
+      return new Promise(function (resolve) {
+        Global.instanceAxios.post(url, params, config)
+          .then(function (response) {
+            const { status, data } = response;
+            resolve(data);
+          })
+          .catch(function (error) {
+            resolve(error.response.data);
+          });
+      });
+
       // return RequestManager.executePost(
       //   url,
       //   {
@@ -712,6 +722,12 @@ export default class Utils {
       });
     }
     return cards;
+  }
+
+  static openInNewTab (url: string) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    window.open(url, '_blank').focus();
   }
   //
   // static isPhoneNumberValid (phoneNumber: string) {

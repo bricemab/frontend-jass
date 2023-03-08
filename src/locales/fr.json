@@ -7,7 +7,25 @@
       "blue": "Bleu"
     }
   },
+  "resetPasswordPage": {
+    "errorMessages": {
+      "empty": "Veuillez saisir un email ou un pseudo valide",
+      "notFound": "L'email ou le pseudo saisit n'existe pas",
+      "expired": "Le lien a expiré. Veuillez recommencer la procédire de réinitialisation du mot de passe",
+      "notSame": "Les mots de passe ne correspondent pas"
+    },
+    "verify": "Vérification des données envoyés",
+    "mailSent": "Un email vient de vous être envoyé",
+    "sendMail": "Envoyer",
+    "successResetPassword": "Votre mot de passe a bien été changé",
+    "password": "Nouveau mot de passe",
+    "editPassword": "Changer le mot de passe",
+    "changePassword": "Réinitialiser votre mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "back": "Retour"
+  },
   "loginPage": {
+    "forgetPassword": "Mot de passe oublié ?",
     "welcome": "Bienvenue !",
     "infoDisplayName": "Ce pseudo sera visible lors de vos parties",
     "loginInfo": "Pour accéder à la platforme de jeu, veuillez-vous connecter avec vos identifiants",
@@ -30,20 +48,32 @@
   },
   "dashboard": {
     "welcome": "Bienvenue sur e-jass",
+    "contactUs": {
+      "availability": "Nous sommes disponible du lundi au samedi de 9h00 à 20h00.",
+      "chat": "Par chat",
+      "chatInfo": "Vous pouvez nous contacter via notre compte instagram et nous écrire directement en message privé.",
+      "mail": "Par email",
+      "mailInfo": "Écrivez-nous un email sur notre adresse"
+    },
     "ideas": {
       "firstLogin": "N'hésitez pas à aller faire un tour dans la page \"Vos idéees\" pour de me laisser vos idées afin d'améliorer la plateforme",
-      "ideas": "Vos idées",
-      "ideasInfo": "Actuellement, la plateforme e-jass est encore en cours de development. Elle aura pour but de pouvoir jouer au fameux jeu de carte qu'est le Jass. Vous avez la possibilité de participer au bon développement de cette plateforme en envoyant toutes sortes d'idées qui pourraient améliorer le contenu de e-jass.",
+      "ideas": "Boite à idées",
+      "ideasInfo": "Actuellement, la plateforme e-jass est encore en cours de développement. Elle aura pour but de pouvoir jouer au fameux jeu de cartes qu'est le jass. Vous avez la possibilité de participer au bon développement de cette plateforme en envoyant toutes sortes d'idées qui pourraient améliorer le contenu de e-jass.",
       "form": {
         "object": "Objet",
         "content": "Contenu",
         "file": "Attacher un fichier",
-        "feedback": "Recevoir un feedback de votre idée par mail",
+        "fileInput": "Glisser vos fichiers ici ou <u>cliquer ici</u> pour téléverser",
+        "feedback": "Recevoir un retour sur votre idée par e-mail",
         "send": "Envoyer"
       },
       "errors": {
         "objectEmpty": "L'objet ne peut pas être vide",
         "contentEmpty": "Le contenu du message ne peut pas être vide"
+      },
+      "success": {
+        "newIdea": "Votre idée nous a été envoyé avec succés. Merci de votre collaboration",
+        "newIdeaFeedback": "Vous recevrez une réponse dans les plus brefs délais"
       }
     },
     "disabledModules": {
@@ -53,10 +83,10 @@
     "navbar": {
       "home": "Acceuil",
       "play": "Jouer",
-      "ideas": "Vos idées",
+      "ideas": "Boite à idées",
       "aboutUs": "A propos de nous",
       "tournaments": "Tournois",
-      "contactUs": "Nous contacter",
+      "contactUs": "Contactez-nous",
       "profile": "Profile",
       "logOff": "Déconnexion"
     },

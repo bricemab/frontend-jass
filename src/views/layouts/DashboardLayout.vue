@@ -9,7 +9,7 @@
       <router-link @click="closeMenu" to="/dashboard/ideas">{{ $t('dashboard.navbar.ideas') }}</router-link>
       <router-link @click="closeMenu" v-on:click="tournamentDisabled" to="/dashboard/tournaments">{{ $t('dashboard.navbar.tournaments') }}</router-link>
       <router-link @click="closeMenu" to="/dashboard/about-us">{{ $t('dashboard.navbar.aboutUs') }}</router-link>
-      <router-link @click="closeMenu" to="/about">{{ $t('dashboard.navbar.contactUs') }}</router-link>
+      <router-link @click="closeMenu" to="/dashboard/contact-us">{{ $t('dashboard.navbar.contactUs') }}</router-link>
       <router-link @click="closeMenu" to="/profile">{{ $t('dashboard.navbar.profile') }}</router-link>
       <a @click="logout" href="#">{{ $t('dashboard.navbar.logOff') }}</a>
     </div>
@@ -24,7 +24,7 @@
     <router-view/>
   </div>
   <div class="footer">
-    © Copyright {{ date }} Brice Mabillard.
+    © Copyright {{ date }} e-jass.
   </div>
 </template>
 

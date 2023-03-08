@@ -9,7 +9,7 @@
     <img src="../../assets/trumps/diamonds_default.svg">
   </div>
   <div class="footer">
-    © Copyright {{date}} Brice Mabillard.
+    © Copyright {{date}} e-jass.
   </div>
 </template>
 <script lang="ts">

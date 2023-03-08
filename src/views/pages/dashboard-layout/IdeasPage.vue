@@ -1,10 +1,11 @@
 <template>
+  <Loader v-if="isLoading"/>
   <div class="ideas">
-    <h1>Vos idées</h1>
+    <h1>{{ $t("dashboard.ideas.ideas") }}</h1>
     <div class="info">{{$t('dashboard.ideas.ideasInfo')}}</div>
     <div class="input-field is-label max-width">
-      <label>{{$t('dashboard.ideas.form.object')}} *</label>
-      <input type="text" class="input is-light max-width" v-model="object" :placeholder="$t('dashboard.ideas.form.object')">
+      <label>{{$t('dashboard.ideas.form.object')}} * <span style="font-size: 10px;">({{object.length}} / 255)</span></label>
+      <input type="text" class="input is-light max-width" v-model="object" v-on:input="validObjectLenght" :placeholder="$t('dashboard.ideas.form.object')">
     </div>
     <div class="input-field is-label max-width">
       <label>{{$t('dashboard.ideas.form.content')}} *</label>
@@ -21,6 +22,7 @@
         <input
           type="file"
           name="file"
+          multiple
           id="fileInput"
           class="hidden-input"
           @change="onChange"
@@ -29,8 +31,7 @@
         />
 
         <label for="fileInput" class="file-label">
-          <div v-if="isDragging">Release to drop files here.</div>
-          <div v-else>Drop files here or <u>click here</u> to upload.</div>
+          <div v-html="$t('dashboard.ideas.form.fileInput')"></div>
         </label>
         <div class="preview-container" v-if="files.length">
           <div v-for="file in files" :key="file.name" class="preview-card">
@@ -63,21 +64,32 @@
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-class-component';
+import { Options, Vue } from 'vue-class-component';
 import Utils from '@/utils/Utils';
+import Loader from '@/views/Loader.vue';
 
+@Options({
+  components: {
+    Loader
+  }
+})
 export default class IdeasPage extends Vue {
   public isDragging = false;
   public files: File[] = [];
   public object = '';
   public content = '';
   public feedback = false;
+  public isLoading = false;
+
+  validObjectLenght () {
+    this.object = this.object.slice(0, 255);
+  }
 
   async submitForm () {
     let isValid = true;
-    if (this.object.trim() === 'dashboard.ideas.errors.objectEmpty') {
+    if (this.object.trim() === '') {
       isValid = false;
-      Utils.toastError('', Utils.translate(''));
+      Utils.toastError('', Utils.translate('dashboard.ideas.errors.objectEmpty'));
     }
     if (this.content.trim() === '') {
       isValid = false;
@@ -87,7 +99,7 @@ export default class IdeasPage extends Vue {
     if (!isValid) {
       return false;
     }
-
+    this.isLoading = true;
     const formData = new FormData();
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -99,12 +111,7 @@ export default class IdeasPage extends Vue {
     formData.append('object', this.object);
     formData.append('content', this.content);
     formData.append('feedback', this.feedback ? '1' : '0');
-
-    console.log(formData);
-    for (const key of formData.entries()) {
-      console.log(key[0] + ', ' + key[1]);
-    }
-    await Utils.postEncodedToBackend(
+    const response = await Utils.postEncodedToBackend(
       '/ideas/new',
       formData,
       {
@@ -112,7 +119,20 @@ export default class IdeasPage extends Vue {
           'Content-Type': 'multipart/form-data',
           'x-user-token': sessionStorage.getItem('token')
         }
-      }, true);
+      },
+      true
+    );
+
+    this.isLoading = false;
+    if (response.success) {
+      this.files = [];
+      this.object = '';
+      this.content = '';
+      let text = Utils.translate('dashboard.ideas.success.newIdea');
+      text += this.feedback ? ' ' + Utils.translate('dashboard.ideas.success.newIdeaFeedback') : '';
+      this.feedback = false;
+      Utils.toastSuccess('', text);
+    }
   }
 
   onChange () {
@@ -166,6 +186,12 @@ export default class IdeasPage extends Vue {
 .input-field input.input, .input-field textarea.input {
   width: calc(100% - 20px);
 }
+.dashboard-wrapper:has(.ideas) {
+  overflow-x: auto;
+  width: 100%;
+  height: calc(100% - 120px);
+  padding-top: 20px;
+}
 .input-field.is-label label {
   width: auto;
 }
@@ -211,6 +237,7 @@ export default class IdeasPage extends Vue {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
+  padding-bottom: 5px;
 }
 
 .preview-card {

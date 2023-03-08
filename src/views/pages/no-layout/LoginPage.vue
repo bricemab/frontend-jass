@@ -38,7 +38,8 @@
         <input @keyup.enter="login" :type="passwordRevele" v-model="password" autocomplete="off" class="input"
                :placeholder="$t('loginPage.password')">
       </div>
-      <div class="margin-top">
+      <router-link to="/reset-password" class="forget-password">{{$t("loginPage.forgetPassword")}}</router-link>
+      <div class="margin-top" >
         <button class="primary" @click="login">{{ $t('loginPage.loginButton') }}</button>
       </div>
     </div>
@@ -212,6 +213,17 @@ export default class LoginPage extends Vue {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    .forget-password {
+      text-align: left;
+      color: $white;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .margin-top {
+      margin-top: 10px;
+    }
   }
 }
 
