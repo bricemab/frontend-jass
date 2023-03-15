@@ -103,7 +103,7 @@ export default class HomePage extends Vue {
 
   mounted () {
     if (sessionStorage.getItem('first-login')) {
-      Utils.toastInfo(Utils.translate('dashboard.welcome'), Utils.translate('dashboard.ideas.firstLogin'), 99999999, 'top-center');
+      // Utils.toastInfo(Utils.translate('dashboard.welcome'), Utils.translate('dashboard.ideas.firstLogin'), 99999999, 'top-center');
       sessionStorage.removeItem('first-login');
     }
   }

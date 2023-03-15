@@ -107,25 +107,36 @@ export default class LoginPage extends Vue {
     }
     if (!isValid) return;
 
-    store.dispatch('register', {
+    const registerResponse = await Utils.postEncodedToBackend('/users/register', {
       pseudo: this.pseudo,
       email: this.email,
       password: this.password
-    }).then((data: ApplicationResponse<any>) => {
-      if (data.success && data.data) {
-        this.$router.push('/dashboard');
-      } else {
-        Utils.manageError(data.error!);
-      }
     });
+    if (!registerResponse.data && !registerResponse.success) {
+      Utils.manageError(registerResponse.error!);
+    }
+    this.switchMode();
+    Utils.toastSuccess('', Utils.translate('loginPage.registerSuccess'));
+    // store.dispatch('register', {
+    //   pseudo: this.pseudo,
+    //   email: this.email,
+    //   password: this.password
+    // }).then((data: ApplicationResponse<any>) => {
+    //   if (data.success && data.data) {
+    //     this.$router.push('/dashboard');
+    //   } else {
+    //     Utils.manageError(data.error!);
+    //   }
+    // });
   }
 
   login () {
     store.dispatch('login', {
       username: this.emailOrPseudo,
       password: this.password
-    }).then((data: ApplicationResponse<any>) => {
+    }).then(async (data: ApplicationResponse<any>) => {
       if (data.success) {
+        await Utils.createTimeOut(1000);
         this.$router.push('/dashboard');
       } else {
         Utils.manageError(data.error!);

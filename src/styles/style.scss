@@ -265,24 +265,15 @@ button:hover {
     display: flex;
     flex-direction: row;
     height: 100%;
-    a {
-      //font-weight: bold;
+    > a {
       padding: 0 15px;
       text-decoration: none;
       height: 100%;
       align-items: center;
       color: $primaryText;
       display: flex;
-      //background:
-      //  linear-gradient( 90deg, $primaryText  50%, #fff 0),
-      //  linear-gradient(-90deg, $primaryText  50%, #fff 0),
-      //  linear-gradient( 90deg, #0000 50%, $primaryText 0),
-      //  linear-gradient(-90deg, #0000 50%, $primaryText 0);
-      //background-repeat: no-repeat;
-      //background-size: 200% 50%;
-      //background-position: top left, bottom right;
-      //-webkit-background-clip: text, text, padding-box, padding-box;
       transition: 0.5s;
+      position: relative;
 
       &:not(.router-link-exact-active):hover {
         //background-color: $grey;
@@ -295,6 +286,66 @@ button:hover {
         background-color: $primaryText;
         font-weight: bold;
         color: $red;
+      }
+    }
+    .dropdown {
+      padding: 0 15px;
+      text-decoration: none;
+      height: 100%;
+      align-items: center;
+      color: $primaryText;
+      display: flex;
+      transition: 0.5s;
+      position: relative;
+      cursor: pointer;
+      &:hover {
+        //background-color: $grey;
+        color: $red;
+        font-weight: bold;
+        background-color: $white;
+        background-position: top right, bottom left;
+      }
+      &.open {
+        .items {
+          transition: 0.4s;
+          opacity: 1;
+          visibility: initial;
+        }
+      }
+      .parent {
+        display: flex;
+        align-items: center;
+      }
+      .item-icon {
+        font-size: 12px;
+        margin-left: 5px;
+        > * {
+          rotate: 90deg;
+        }
+      }
+      .items {
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+        top: 100%;
+        right: 0;
+        background-color: $secondBg;
+        a {
+          padding: 10px 20px;
+          line-height: 20px;
+          color: $white;
+          width: calc(100% - 40px);
+          text-decoration: none;
+          transition: 0.5s;
+          display: flex;
+          align-items: center;
+          &:hover {
+            color: $grey;
+            font-weight: bold;
+            background-color: $white;
+            background-position: top right, bottom left;
+          }
+        }
       }
     }
   }
@@ -395,7 +446,7 @@ button:hover {
     left: 0;
     display: block;
     background: black;
-    z-index: 100;
+    //z-index: 100;
     height: calc(100% - 260px);
     width: 100%;
     opacity: 0.5;
@@ -780,6 +831,9 @@ button:hover {
       a {
         height: calc(100% / $nbrMenu)
       }
+      div {
+        height: calc(100% / $nbrMenu)
+      }
     }
     .close-open-menu{
       display: block;
@@ -875,6 +929,9 @@ button:hover {
       a {
         height: calc(100% / $nbrMenu)
       }
+      div {
+        height: calc(100% / $nbrMenu)
+      }
     }
     .close-open-menu{
       display: block;
@@ -963,7 +1020,7 @@ button:hover {
       }
     }
     .menu {
-      a {
+      a, .parent {
         padding: 0 10px;
         font-size: 13px;
       }
@@ -1007,7 +1064,7 @@ button:hover {
     padding: 0 50px;
     width: calc(100% - 100px);
     .menu {
-      a {
+      a, .parent {
         font-size: 14px;
       }
     }
@@ -1050,7 +1107,7 @@ button:hover {
     padding: 0 50px;
     width: calc(100% - 100px);
     .menu {
-      a {
+      a, .parent {
         font-size: 14px;
       }
     }

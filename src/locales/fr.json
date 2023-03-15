@@ -7,6 +7,12 @@
       "blue": "Bleu"
     }
   },
+  "verifiedAccount": {
+    "title": "Vérification du compte",
+    "redirect": "Vous allez être redirigé",
+    "complete": "Votre compte a été vérifié",
+    "verifyInProgress": "Vérification du compte en cours"
+  },
   "resetPasswordPage": {
     "errorMessages": {
       "empty": "Veuillez saisir un email ou un pseudo valide",
@@ -37,12 +43,14 @@
     "email": "Email",
     "password": "Mot de passe",
     "emailOrPseudo": "Email ou pseudo",
+    "registerSuccess": "Un email de confirmation vous a été envoyé. Veuillez valider la création du compte avant de vous connecter",
     "errors": {
       "emptyPseudo": "Le pseudo ne peut pas être vide",
       "correctEmail": "Veuillez entrer une adresse email correcte",
       "correctPassword": "Le mot de passe doit contenir au moins une lettre minuscule, majuscule et un chiffre",
       "invalidCredentials": "Les identifiants sont invalides",
       "emailNotUnique": "L'adresse email est déjà existante, veuillez en choisir une autre",
+      "notVerified": "Votre compte n'a pas été vérifié. Nous vous avons renvoyé un email afin de confirmer la création du compte",
       "pseudoNotUnique": "Le pseudo choisi est déjà existant, veuillez en choisir un autre"
     }
   },
@@ -53,7 +61,9 @@
       "chat": "Par chat",
       "chatInfo": "Vous pouvez nous contacter via notre compte instagram et nous écrire directement en message privé.",
       "mail": "Par email",
-      "mailInfo": "Écrivez-nous un email sur notre adresse"
+      "mailInfo": "Écrivez-nous un email sur notre adresse",
+      "error": "Une erreur est survenue lors de l'envoie de votre message",
+      "success": "Votre message nous a correctement été envoyé. Nous vous répondrons dans les plus brefs délais."
     },
     "ideas": {
       "firstLogin": "N'hésitez pas à aller faire un tour dans la page \"Vos idéees\" pour de me laisser vos idées afin d'améliorer la plateforme",

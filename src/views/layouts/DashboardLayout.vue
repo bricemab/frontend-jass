@@ -8,10 +8,19 @@
       <router-link @click="closeMenu" to="/dashboard">{{ $t('dashboard.navbar.play') }}</router-link>
       <router-link @click="closeMenu" to="/dashboard/ideas">{{ $t('dashboard.navbar.ideas') }}</router-link>
       <router-link @click="closeMenu" v-on:click="tournamentDisabled" to="/dashboard/tournaments">{{ $t('dashboard.navbar.tournaments') }}</router-link>
-      <router-link @click="closeMenu" to="/dashboard/about-us">{{ $t('dashboard.navbar.aboutUs') }}</router-link>
+<!--      <router-link @click="closeMenu" to="/dashboard/about-us">{{ $t('dashboard.navbar.aboutUs') }}</router-link>-->
       <router-link @click="closeMenu" to="/dashboard/contact-us">{{ $t('dashboard.navbar.contactUs') }}</router-link>
-      <router-link @click="closeMenu" to="/profile">{{ $t('dashboard.navbar.profile') }}</router-link>
-      <a @click="logout" href="#">{{ $t('dashboard.navbar.logOff') }}</a>
+      <div :class="isProfilOpen ? 'dropdown open' : 'dropdown'" @click="isProfilOpen = !isProfilOpen">
+        <div class="parent">
+          <span>Profile</span>
+          <span class="icon fa item-icon"><font-awesome-icon icon="play"/></span>
+        </div>
+        <div class="items">
+          <router-link @click="closeMenu" to="/profile">{{ $t('dashboard.navbar.profile') }}</router-link>
+          <a @click="logout" href="#">{{ $t('dashboard.navbar.logOff') }}</a>
+        </div>
+      </div>
+
     </div>
     <div :class="openCloseMenu" @click="openCloseMenuAction()">
       <span></span>
@@ -38,13 +47,18 @@ import config from '@/config/config';
 
 export default class DashboardLayout extends Vue {
   public isMenuOpen = false
+  public isProfilOpen = false
 
   public openCloseMenuAction () {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
   public closeMenu () {
+    // if (this.isMenuOpen) {
+    //   this.isProfilOpen = false;
+    // }
     this.isMenuOpen = false;
+    this.isProfilOpen = false;
   }
 
   public logout () {
@@ -77,6 +91,40 @@ export default class DashboardLayout extends Vue {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+@import "@/styles/variables.scss";
+@media screen and (min-width: 480px) and (max-width: 599px) {
+  .dropdown {
+    display: flex;
+    align-items: baseline !important;
+    flex-direction: column !important;
+    justify-content: center;
+    background-color: $redSecond;
+    &:hover {
+      color: inherit !important;
+      font-weight: inherit !important;
+      background-color: inherit !important;
+      background-position: inherit !important;
+    }
+    &.open {
+      padding: 15px !important;
+      height: 30% !important;
+      justify-content: initial !important;
+    }
+    .items {
+      margin-top: 5px;
+      height: calc(100% - 10px);
+      width: 100%;
+      position: initial !important;
+      background-color: initial !important;
+      display: flex;
+      align-items: baseline;
+      flex-direction: column;
+      a {
+        padding: 8px 20px !important;
+        height: 100% !important;
+      }
+    }
+  }
+}
 </style>

@@ -4,7 +4,12 @@
     <h1>{{$t('dashboard.navbar.contactUs')}}</h1>
     <div class="info">{{$t('dashboard.contactUs.availability')}}</div>
     <div class="contact-form">
-      <div class="input-field max-width">
+      <div class="input-field is-label max-width">
+        <label>{{$t('dashboard.ideas.form.object')}} * <span style="font-size: 10px;">({{object.length}} / 255)</span></label>
+        <input type="text" class="input is-light max-width" v-model="object" v-on:input="validObjectLenght" :placeholder="$t('dashboard.ideas.form.object')">
+      </div>
+      <div class="input-field max-width is-label">
+        <label>{{$t('dashboard.ideas.form.content')}} *</label>
         <textarea  :placeholder="$t('dashboard.ideas.form.content')" v-model="content" class="input is-light max-width"></textarea>
       </div>
       <div class="send">
@@ -12,7 +17,7 @@
       </div>
     </div>
     <div class="contact-wrapper">
-      <a class="contact" href="mailto:bonjour@brice-mabillard.ch">
+      <a class="contact" href="mailto:contact@e-jass.ch">
         <div class="contact-icon">
           <span class="icon fa"><font-awesome-icon icon="envelope"/></span>
         </div>
@@ -41,9 +46,38 @@ import Utils from '@/utils/Utils';
 export default class ContactUsPage extends Vue {
   public isLoaded = false;
   public content = '';
+  public object = '';
 
-  submitForm () {
-    return true;
+  validObjectLenght () {
+    this.object = this.object.slice(0, 255);
+  }
+
+  async submitForm () {
+    let isValid = true;
+    if (this.object.trim() === '') {
+      isValid = false;
+      Utils.toastError('', Utils.translate('dashboard.ideas.errors.objectEmpty'));
+    }
+    if (this.content.trim() === '') {
+      isValid = false;
+      Utils.toastError('', Utils.translate('dashboard.ideas.errors.contentEmpty'));
+    }
+
+    if (!isValid) {
+      return false;
+    }
+    const contactResponse = await Utils.postEncodedToBackend('/global/contact', {
+      object: this.object,
+      content: this.content
+    });
+    if (!contactResponse.success && !contactResponse.data) {
+      Utils.toastError('', Utils.translate('dashboard.contactUs.error'));
+    } else {
+      this.content = '';
+      this.object = '';
+      const text = Utils.translate('dashboard.contactUs.success');
+      Utils.toastSuccess('', text);
+    }
   }
 
   openInNewTab (url: string) {
@@ -58,13 +92,15 @@ export default class ContactUsPage extends Vue {
 <style lang="scss">
   @import "@/styles/variables.scss";
   .dashboard-wrapper:has(.contact-wrapper) {
+    input {
+      width: calc(100% - 20px);
+    }
     overflow-x: auto;
-    width: 100%;
+    padding: 20px 20px 0 20px;
+    width: calc(100% - 40px);
     height: calc(100% - 120px);
-    padding-bottom: 20px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: normal;
+    //flex-direction: column;
+    justify-content: center;
     gap: initial;
     text-align: center;
     .info {
@@ -142,7 +178,7 @@ export default class ContactUsPage extends Vue {
 
   @media screen and (max-width: 600px) {
     .contact-wrapper {
-      flex-direction: column;
+      //flex-direction: column;
       align-items: center;
       .contact {
         max-width: 250px;

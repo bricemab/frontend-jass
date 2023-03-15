@@ -7,13 +7,15 @@ import ContactUsPage from '@/views/pages/dashboard-layout/ContactUsPage.vue';
 import NoLayout from '@/views/layouts/NoLayout.vue';
 import LoginPage from '@/views/pages/no-layout/LoginPage.vue';
 import ResetPasswordPage from '@/views/pages/no-layout/ResetPasswordPage.vue';
+import VerifiedAccountPage from '@/views/pages/no-layout/VerifiedAccountPage.vue';
 import { Permission } from '@/permissions';
 import NotFoundPage from '@/views/pages/no-layout/NotFoundPage.vue';
 import DashboardLayout from '@/views/layouts/DashboardLayout.vue';
 import AclManager from '@/AclManager';
 import PlayLayout from '@/views/layouts/PlayLayout.vue';
 import store from '@/store';
-import { UserRoles } from '@/Types/GlobalType';
+import { ApplicationResponse, UserRoles } from '@/Types/GlobalType';
+import Utils from '@/utils/Utils';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -99,6 +101,14 @@ const routes: Array<RouteRecordRaw> = [
         }
       },
       {
+        path: '/verified-account/:token',
+        name: 'verified-account',
+        component: VerifiedAccountPage,
+        meta: {
+          permission: Permission.specialState.userLoggedOff
+        }
+      },
+      {
         path: '/*',
         name: 'not-found',
         component: NotFoundPage,
@@ -116,7 +126,7 @@ const router = createRouter({
   linkActiveClass: 'active-link'
 });
 
-router.beforeEach(function (to, from, next) {
+router.beforeEach(async function (to, from, next) {
   const {
     isAllowed,
     redirectionRoute
@@ -126,11 +136,25 @@ router.beforeEach(function (to, from, next) {
 
   document.title = 'E-Jass';
 
-  // next();
-  if (isAllowed) {
-    next();
-  } else {
-    next(redirectionRoute as string);
+  let isFinish = false;
+  if (!(to.meta.permission === Permission.specialState.userLoggedOff ||
+    to.meta.permision === Permission.specialState.allowAll)) {
+    const verifyResponse = await Utils.postEncodedToBackend('/verify-authentication', {});
+    if (!verifyResponse.success) {
+      store.dispatch('logout').then((data: ApplicationResponse<any>) => {
+        next('/login');
+        isFinish = true;
+      });
+    }
+  }
+
+  if (!isFinish) {
+    // next();
+    if (isAllowed) {
+      next();
+    } else {
+      next(redirectionRoute as string);
+    }
   }
 });
 export default router;

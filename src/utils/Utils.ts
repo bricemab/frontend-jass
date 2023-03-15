@@ -406,6 +406,9 @@ export default class Utils {
       case AuthenticationErrors.AUTH_INVALID_CREDENTIALS:
         this.toastError('', Utils.translate('loginPage.errors.invalidCredentials'));
         break;
+      case AuthenticationErrors.ACCOUNT_NOT_VERIFIED:
+        this.toastInfo('', Utils.translate('loginPage.errors.notVerified'));
+        break;
     }
   }
 
@@ -458,6 +461,24 @@ export default class Utils {
         data: params,
         token
       };
+      if (!config) {
+        config = {};
+      }
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      if (config && !config.headers) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        config.headers = {};
+      }
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      if (config && config.headers) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        config.headers['x-user-token'] = sessionStorage.getItem('token');
+      }
+      console.log(config);
       return RequestManager.executePost(url, data, config);
     }
   }
