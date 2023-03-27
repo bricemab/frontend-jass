@@ -185,7 +185,7 @@ export default class ProfilePage extends Vue {
     if (config.isProduction) {
       return 'https://live.e-jass.ch/profile-pictures/' + this.user?.profilePath;
     } else {
-      return require('@/../../jass-backend/data/profile-pictures/' + this.user?.profilePath);
+      return require('@/../../' + config.isProduction ? 'rest-jass' : 'jass-backend' + '/data/profile-pictures/' + this.user?.profilePath);
     }
   }
 }
