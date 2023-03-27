@@ -6,7 +6,7 @@
         <img class="current-picture" v-else :src="profilePath" alt="profile picture"/>
         <label class="edit-picture icon fa item-icon" for="picture">
           <font-awesome-icon icon="pen"/>
-          <input id="picture" accept="image/*;capture=camera" style="display: none" @change="uploadPicture" ref="file" type="file" accept="image/*" />
+          <input id="picture" accept="image/*;capture=camera" style="display: none" @change="uploadPicture" ref="file" type="file" />
         </label>
       </div>
       <div class="pseudo">{{ user.pseudo }}</div>
