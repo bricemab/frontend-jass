@@ -26,11 +26,13 @@
       </div>
       <div class="input-field is-label max-width">
         <label>{{$t('dashboard.profile.password')}}</label>
-        <input type="text" class="input is-light max-width" v-model="password" @change="validatePassword" :placeholder="$t('dashboard.profile.password')">
+        <span class="icon fa is-password-revele" @click="onPasswordRevele"><font-awesome-icon
+          :icon="isPasswordRevele ? 'eye-slash' : 'eye'"/></span>
+        <input :type="passwordRevele" class="input is-light max-width" v-model="password" @change="validatePassword" :placeholder="$t('dashboard.profile.password')">
       </div>
       <div class="input-field is-label max-width">
         <label>{{$t('dashboard.profile.confirmPassword')}}</label>
-        <input type="text" class="input is-light max-width" v-model="confirmPassword" @change="validatePassword" :placeholder="$t('dashboard.profile.confirmPassword')">
+        <input type="password" class="input is-light max-width" v-model="confirmPassword" @change="validatePassword" :placeholder="$t('dashboard.profile.confirmPassword')">
       </div>
       <div class="send">
         <button class="primary is-small" @click="sendForm">{{$t('dashboard.profile.saveBtn')}}</button>
@@ -59,6 +61,16 @@ export default class ProfilePage extends Vue {
   public profilePicture: null | File = null;
   public emailValidation = STATE_VALIDATION.HIDE;
   public pseudoValidation = STATE_VALIDATION.HIDE;
+  public isPasswordRevele = false;
+
+  get passwordRevele () {
+    return this.isPasswordRevele ? 'text' : 'password';
+  }
+
+  onPasswordRevele () {
+    this.isPasswordRevele = !this.isPasswordRevele;
+    return this.isPasswordRevele;
+  }
 
   public validPseudoLenght () {
     this.pseudo = this.pseudo.slice(0, 20);
@@ -198,6 +210,10 @@ export default class ProfilePage extends Vue {
 <style scoped lang="scss">
 @import "@/styles/variables.scss";
 .dashboard-wrapper:has(.profile) {
+  .is-password-revele {
+    bottom: 0;
+    top: initial;
+  }
   .validation {
     position: relative;
     .check-valid {
