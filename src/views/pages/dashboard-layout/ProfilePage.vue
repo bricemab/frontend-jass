@@ -95,7 +95,7 @@ export default class ProfilePage extends Vue {
       return Utils.toastError('', this.$t('loginPage.errors.correctPassword'));
     }
 
-    if (this.password !== this.confirmPassword) {
+    if (this.password !== this.confirmPassword && this.confirmPassword.trim() !== '') {
       return Utils.toastError('', Utils.translate('resetPasswordPage.errorMessages.notSame'));
     }
   }
@@ -141,11 +141,13 @@ export default class ProfilePage extends Vue {
   }
 
   public async sendForm () {
-    if (!Utils.isPasswordValid(this.password)) {
-      return Utils.toastError('', this.$t('loginPage.errors.correctPassword'));
-    }
-    if (this.password !== this.confirmPassword) {
-      return Utils.toastError('', Utils.translate('resetPasswordPage.errorMessages.notSame'));
+    if (this.password.trim() !== '') {
+      if (!Utils.isPasswordValid(this.password)) {
+        return Utils.toastError('', this.$t('loginPage.errors.correctPassword'));
+      }
+      if (this.password !== this.confirmPassword) {
+        return Utils.toastError('', Utils.translate('resetPasswordPage.errorMessages.notSame'));
+      }
     }
 
     const response = await Utils.postEncodedToBackend('/users/edit-profile', {
@@ -167,6 +169,8 @@ export default class ProfilePage extends Vue {
     user.pseudo = this.pseudo;
     user.email = this.email;
     await store.dispatch('updateUser', user);
+    this.password = '';
+    this.confirmPassword = '';
   }
 
   mounted () {
