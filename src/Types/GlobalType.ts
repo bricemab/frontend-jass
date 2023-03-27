@@ -18,6 +18,7 @@ export enum GeneralErrors {
 export enum AuthenticationErrors {
   AUTH_TOKEN_EXPIRED = 'AUTH_TOKEN_EXPIRED',
   ACCOUNT_NOT_VERIFIED = 'ACCOUNT_NOT_VERIFIED',
+  ACCOUNT_PENDING_EDIT_VERIFICATION = 'ACCOUNT_PENDING_EDIT_VERIFICATION',
   AUTH_BLOCKED = 'AUTH_BLOCKED',
   AUTH_MUST_BE_LOGGED_OFF = 'AUTH_MUST_BE_LOGGED_OFF',
   AUTH_MUST_BE_LOGGED_ON = 'AUTH_MUST_BE_LOGGED_ON',
@@ -70,6 +71,7 @@ export interface UserType {
   password: string;
   registrationDate: Moment;
   lastConnexionDate: Moment;
+  profilePath: string | null;
   wsToken: string;
   isArchived: boolean,
   role: UserRoles
@@ -121,4 +123,10 @@ export interface PositionGame {
 
 export enum MessageErrorType {
   COMMAND_NOT_FOUND = 'COMMAND_NOT_FOUND'
+}
+
+export enum STATE_VALIDATION {
+  'HIDE' = 'HIDE',
+  'ERROR' = 'ERROR',
+  'VALID' = 'VALID'
 }

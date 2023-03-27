@@ -60,9 +60,21 @@ const store = createStore({
       state.token = '';
       state.user = undefined;
       state.userRole = undefined;
+    },
+    updateProfilePicture (state, location) {
+      state.user.profilePath = location;
+    },
+    updateUser (state, user) {
+      state.user = user;
     }
   },
   actions: {
+    updateUser ({ commit }, user) {
+      commit('updateUser', user);
+    },
+    updateProfilePicture ({ commit }, location) {
+      commit('updateProfilePicture', location);
+    },
     login ({ commit }, user) {
       return new Promise(function (resolve, reject) {
         commit('auth_request');
@@ -84,6 +96,7 @@ const store = createStore({
                 axios.defaults.headers.get['x-user-token'] = token;
                 sessionStorage.setItem('token', token);
                 sessionStorage.setItem('first-login', 'true');
+                sessionStorage.setItem('logout-time', moment().add(8, 'hours').format('YYYY-MM-DD HH:mm:ss'));
                 commit('auth_success', {
                   token,
                   user: tokenDecoded.currentUser,

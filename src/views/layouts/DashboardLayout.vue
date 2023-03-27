@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard-navbar">
+  <div class="dashboard-navbar" v-if="user !== null">
     <router-link class="logo" to="/">
       <img src="../../assets/logo_white.svg" alt="logo"/>
       <span>e-jass</span>
@@ -7,16 +7,20 @@
     <div :class="menuClass">
       <router-link @click="closeMenu" to="/dashboard">{{ $t('dashboard.navbar.play') }}</router-link>
       <router-link @click="closeMenu" to="/dashboard/ideas">{{ $t('dashboard.navbar.ideas') }}</router-link>
-      <router-link @click="closeMenu" v-on:click="tournamentDisabled" to="/dashboard/tournaments">{{ $t('dashboard.navbar.tournaments') }}</router-link>
+<!--      <router-link @click="closeMenu" v-on:click="tournamentDisabled" to="/dashboard/tournaments">{{ $t('dashboard.navbar.tournaments') }}</router-link>-->
 <!--      <router-link @click="closeMenu" to="/dashboard/about-us">{{ $t('dashboard.navbar.aboutUs') }}</router-link>-->
       <router-link @click="closeMenu" to="/dashboard/contact-us">{{ $t('dashboard.navbar.contactUs') }}</router-link>
       <div :class="isProfilOpen ? 'dropdown open' : 'dropdown'" @click="isProfilOpen = !isProfilOpen">
         <div class="parent">
-          <span>Profile</span>
+          <span class="picture">
+            <span v-if="user && user.profilePath === null" class="default-profile icon fa item-icon"><font-awesome-icon icon="user"/></span>
+            <img class="current-picture" v-else :src="profilePath" alt="profile picture"/>
+            Profile
+          </span>
           <span class="icon fa item-icon"><font-awesome-icon icon="play"/></span>
         </div>
-        <div class="items">
-          <router-link @click="closeMenu" to="/profile">{{ $t('dashboard.navbar.profile') }}</router-link>
+        <div class="items" @click="closeMenu">
+          <router-link @click="closeMenu" to="/dashboard/profile">{{ $t('dashboard.navbar.profile') }}</router-link>
           <a @click="logout" href="#">{{ $t('dashboard.navbar.logOff') }}</a>
         </div>
       </div>
@@ -40,7 +44,7 @@
 <script lang="ts">
 import { Vue } from 'vue-class-component';
 import store from '@/store';
-import { ApplicationResponse } from '@/Types/GlobalType';
+import { ApplicationResponse, UserType } from '@/Types/GlobalType';
 import Utils from '@/utils/Utils';
 import moment from 'moment';
 import config from '@/config/config';
@@ -48,15 +52,25 @@ import config from '@/config/config';
 export default class DashboardLayout extends Vue {
   public isMenuOpen = false
   public isProfilOpen = false
+  public user: UserType | null = null;
+
+  mounted () {
+    this.user = store.getters.user;
+  }
+
+  get profilePath () {
+    if (config.isProduction) {
+      return 'https://live.e-jass.ch/profile-pictures/' + this.user?.profilePath;
+    } else {
+      return require('@/../../jass-backend/data/profile-pictures/' + this.user?.profilePath);
+    }
+  }
 
   public openCloseMenuAction () {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
   public closeMenu () {
-    // if (this.isMenuOpen) {
-    //   this.isProfilOpen = false;
-    // }
     this.isMenuOpen = false;
     this.isProfilOpen = false;
   }
@@ -93,6 +107,46 @@ export default class DashboardLayout extends Vue {
 
 <style scoped lang="scss">
 @import "@/styles/variables.scss";
+.dashboard-navbar {
+  .picture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 5px;
+      position: relative;
+      height: 20px;
+      width: 20px;
+      background: white;
+      padding: 5px;
+      border-radius: 50%;
+      color: $grey;
+      rotate: initial;
+      font-size: 13px;
+    }
+    .default-profile > *{
+      rotate: 0deg !important;
+    }
+  }
+  .picture:has(.current-picture) {
+    height: initial;
+    width: initial;
+    background: initial;
+    padding: 0;
+    color: white;
+    img {
+      margin-right: 5px;
+      height: 30px;
+      width: 30px;
+      object-fit:cover;
+      object-position:50% 50%;
+      border-radius: 50%;
+    }
+  }
+}
 @media screen and (min-width: 480px) and (max-width: 599px) {
   .dropdown {
     display: flex;
@@ -124,6 +178,15 @@ export default class DashboardLayout extends Vue {
         padding: 8px 20px !important;
         height: 100% !important;
       }
+    }
+  }
+}
+@media screen and (max-width: 480px) {
+  .dropdown {
+    .items {
+      width: 100% !important;
+      background: #9b1515 !important;
+      height: calc(100% + 40px) !important;
     }
   }
 }

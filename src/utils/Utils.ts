@@ -409,6 +409,9 @@ export default class Utils {
       case AuthenticationErrors.ACCOUNT_NOT_VERIFIED:
         this.toastInfo('', Utils.translate('loginPage.errors.notVerified'));
         break;
+      case AuthenticationErrors.ACCOUNT_PENDING_EDIT_VERIFICATION:
+        this.toastInfo('', Utils.translate('loginPage.errors.notVerified'));
+        break;
     }
   }
 

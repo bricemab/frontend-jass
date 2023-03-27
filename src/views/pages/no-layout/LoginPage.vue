@@ -113,7 +113,7 @@ export default class LoginPage extends Vue {
       password: this.password
     });
     if (!registerResponse.data && !registerResponse.success) {
-      Utils.manageError(registerResponse.error!);
+      return Utils.manageError(registerResponse.error!);
     }
     this.switchMode();
     Utils.toastSuccess('', Utils.translate('loginPage.registerSuccess'));

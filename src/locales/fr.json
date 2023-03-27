@@ -51,6 +51,7 @@
       "invalidCredentials": "Les identifiants sont invalides",
       "emailNotUnique": "L'adresse email est déjà existante, veuillez en choisir une autre",
       "notVerified": "Votre compte n'a pas été vérifié. Nous vous avons renvoyé un email afin de confirmer la création du compte",
+      "emailEditNotVerified": "La mo. Nous vous avons renvoyé un email afin de confirmer la création du compte",
       "pseudoNotUnique": "Le pseudo choisi est déjà existant, veuillez en choisir un autre"
     }
   },
@@ -58,12 +59,31 @@
     "welcome": "Bienvenue sur e-jass",
     "contactUs": {
       "availability": "Nous sommes disponible du lundi au samedi de 9h00 à 20h00.",
-      "chat": "Par chat",
+      "chat": "Par Instagram",
       "chatInfo": "Vous pouvez nous contacter via notre compte instagram et nous écrire directement en message privé.",
       "mail": "Par email",
       "mailInfo": "Écrivez-nous un email sur notre adresse",
       "error": "Une erreur est survenue lors de l'envoie de votre message",
       "success": "Votre message nous a correctement été envoyé. Nous vous répondrons dans les plus brefs délais."
+    },
+    "profile": {
+      "email": "Email",
+      "pseudo": "Pseudo",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmation du mot de passe",
+      "saveBtn": "Enregistrer",
+      "success": "Votre compte a été modifié avec succés",
+      "infoEmailChange": "Nous avons envoyé un email de vérification à votre nouvelle adresse. Une fois qu'il sera vérifié, il sera appliqué à votre compte.",
+      "errorMessages": {
+        "pseudoExist": "Ce pseudo est déjà utilisé par quelqu'un d'autre",
+        "pseudoEmpty": "Veuillez remplir un pseudo",
+        "emailEmpty": "Veuillez remplir un email",
+        "emailExist": "Cet email est déjà utilisé par quelqu'un d'autre",
+        "error": "Une erreur est survenue. Veuillez contacter un administrateur"
+      },
+      "successMessages": {
+        "profile": "Votre profile a été enregistré avec succés"
+      }
     },
     "ideas": {
       "firstLogin": "N'hésitez pas à aller faire un tour dans la page \"Vos idéees\" pour de me laisser vos idées afin d'améliorer la plateforme",

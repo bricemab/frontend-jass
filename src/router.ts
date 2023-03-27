@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import HomePage from '@/views/pages/dashboard-layout/HomePage.vue';
 import AdminIdeasPage from '@/views/pages/dashboard-layout/AdminIdeasPage.vue';
+import ProfilePage from '@/views/pages/dashboard-layout/ProfilePage.vue';
 import IdeasPage from '@/views/pages/dashboard-layout/IdeasPage.vue';
 import AboutUsPage from '@/views/pages/dashboard-layout/AboutUsPage.vue';
 import ContactUsPage from '@/views/pages/dashboard-layout/ContactUsPage.vue';
@@ -16,6 +17,7 @@ import PlayLayout from '@/views/layouts/PlayLayout.vue';
 import store from '@/store';
 import { ApplicationResponse, UserRoles } from '@/Types/GlobalType';
 import Utils from '@/utils/Utils';
+import moment from 'moment';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -55,6 +57,14 @@ const routes: Array<RouteRecordRaw> = [
         name: 'ideas',
         // eslint-disable-next-line no-constant-condition
         component: store.getters.userRole === UserRoles.USER_ADMIN && false ? AdminIdeasPage : IdeasPage,
+        meta: {
+          permission: Permission.specialState.userLoggedIn
+        }
+      },
+      {
+        path: 'profile',
+        name: 'profile',
+        component: ProfilePage,
         meta: {
           permission: Permission.specialState.userLoggedIn
         }
@@ -139,12 +149,10 @@ router.beforeEach(async function (to, from, next) {
   let isFinish = false;
   if (!(to.meta.permission === Permission.specialState.userLoggedOff ||
     to.meta.permision === Permission.specialState.allowAll)) {
-    const verifyResponse = await Utils.postEncodedToBackend('/verify-authentication', {});
-    if (!verifyResponse.success) {
-      store.dispatch('logout').then((data: ApplicationResponse<any>) => {
-        next('/login');
-        isFinish = true;
-      });
+    const logoutTime = sessionStorage.getItem('logout-time');
+    if (moment().diff(logoutTime) > 0) {
+      await store.dispatch('logout');
+      isFinish = true;
     }
   }
 
@@ -155,6 +163,8 @@ router.beforeEach(async function (to, from, next) {
     } else {
       next(redirectionRoute as string);
     }
+  } else {
+    next('/login');
   }
 });
 export default router;
